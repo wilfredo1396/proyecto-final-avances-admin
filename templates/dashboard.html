@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block contents %}
+<h1>Dashboard</h1>
+
+<div> 
+    <h3>Enter</h3>
+<br>
+    <a href="{{ url_for('orders.create') }}">Enter purchase</a>
+<br>
+    <a href="{{ url_for('orders.home') }}">Enter sale</a>
+</div>
+
+<div> 
+    <h3>View</h3>
+<br>
+    <a href="{{ url_for('orders.create') }}">Stock</a>
+<br>
+    <a href="{{ url_for('orders.home') }}">Reports</a>
+</div>
+
+{% endblock %}
