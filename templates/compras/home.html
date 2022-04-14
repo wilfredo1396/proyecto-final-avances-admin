@@ -1,0 +1,46 @@
+{% extends '/compras/base.html' %}
+
+{% block title %}Compras{% endblock  %}
+
+{% block contents %}
+<br>
+{% if user %}
+<p>Bienvenido, {{user.username}}</p>
+{% endif %}
+<br>
+<br>
+<a href="{{ url_for('compras.NuevaCompra', saleperson = user.username) }}">agregar compra</a>
+<br>
+<br>
+<table>
+    <thead>
+        <tr>
+            <th> Id </th>
+            <th> Proveedor </th>
+            <th> Descripción </th>
+            <th> Precio unitario </th>
+            <th> Cantidad </th>
+            <th> Fecha de compra </th>
+            <th> Total </th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.proveedor }}</td>
+            <td>{{ item.descripcion }}</td>
+            <td>{{ item.precio_unitario }}</td>
+            <td>{{ item.cantidad }}</td>
+            <td>{{ item.fecha }}</td>
+            <td>{{ item.total_compra }}</td>
+            <td><a href="#">Eliminar compra</a></td>
+            <td><a href="#">Actualizar compra</a></td>
+        </tr>
+        
+        {% endfor %}
+    </tbody>
+
+</table>
+{% endblock  %}
