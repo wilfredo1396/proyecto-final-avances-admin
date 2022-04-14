@@ -24,7 +24,7 @@ def login():
         if currentUser:
             if bcrypt.check_password_hash(currentUser.password, password):
                 login_user(currentUser)
-                return redirect(url_for("auth.dashboard"))
+                return redirect(url_for("productos.home"))
     return render_template("login.html", form=form)
 
 
@@ -48,8 +48,3 @@ def logout():
     return redirect(url_for("auth.login"))
 
 
-@auth.route("/dashboard")
-@login_required
-def dashboard():
-    print(f"current_user: {current_user}")
-    return render_template("dashboard.html", user=current_user)

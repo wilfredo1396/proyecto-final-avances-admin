@@ -1,0 +1,39 @@
+{% extends '/inventario/base.html' %}
+
+{% block title %}Inventario{% endblock  %}
+
+{% block contents %}
+<br>
+{% if user %}
+<p>Bienvenido, {{user.username}}</p>
+{% endif %}
+<br>
+<br>
+<table>
+    <thead>
+        <tr>
+            <th> Id producto </th>
+            <th> Producto </th>
+            <th> Existencia </th>
+            <th> Gastos </th>
+            <th> Ingresos </th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.id_producto }}</td>
+            <td>{{ item.producto }}</td>
+            <td>{{ item.exitencia }}</td>
+            <td>{{ item.gasto_compra }}</td>
+            <td>{{ item.ingreso_venta }}</td>
+            <td><a href="#">Eliminar</a></td>
+            <td><a href="#">Actualizar </a></td>
+        </tr>
+        
+        {% endfor %}
+    </tbody>
+
+</table>
+{% endblock  %}
