@@ -9,7 +9,7 @@
 {% endif %}
 <br>
 <br>
-<a href="{{ url_for('compras.NuevaCompra', saleperson = user.username) }}">agregar compra</a>
+<a href="{{ url_for('compras.NuevaCompra') }}">Agregar compra</a>
 <br>
 <br>
 <table>
@@ -35,8 +35,8 @@
             <td>{{ item.cantidad }}</td>
             <td>{{ item.fecha }}</td>
             <td>{{ item.total_compra }}</td>
-            <td><a href="#">Eliminar compra</a></td>
-            <td><a href="#">Actualizar compra</a></td>
+            <td><a href="{{ url_for('compras.EliminarCompra', id=item.id) }}">Agregar compra</a></td>
+            <td><a href="#">Actualizar </a></td>
         </tr>
         
         {% endfor %}

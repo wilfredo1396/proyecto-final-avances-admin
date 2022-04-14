@@ -4,10 +4,10 @@ class Compra(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     proveedor = db.Column(db.String(80), nullable=False)
     descripcion = db.Column(db.String(120), nullable=False)
-    precio_unitario = db.Column(db.Integer, nullable=False)
+    precio_unitario = db.Column(db.Float, nullable=False)
     cantidad = db.Column(db.Integer, nullable=False)
     fecha = db.Column(db.String(50), nullable=False)
-    total_compra = db.Column(db.Integer, nullable=False)
+    total_compra = db.Column(db.Float, nullable=False)
     
     def __init__(self, proveedor, descripcion, precio_unitario, cantidad, fecha=None, total_compra=0, ) -> None:
         self.proveedor = proveedor

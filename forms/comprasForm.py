@@ -1,10 +1,11 @@
 from flask_wtf import FlaskForm
+from wtforms import FloatField
 from wtforms import StringField, SubmitField, IntegerField
 from wtforms.validators import InputRequired, Length
 
 
 
-class NuevaCompra(FlaskForm):
+class Nueva_Compra(FlaskForm):
     proveedor = StringField(
         validators=[
             InputRequired(),
@@ -13,15 +14,15 @@ class NuevaCompra(FlaskForm):
         render_kw={"placeholder": "Proveedor"},
     )
     
-    descripcion = IntegerField(
+    descripcion = StringField(
         validators=[
             InputRequired(),
-            Length(min=10, max=120),
+            Length(min=5, max=120),
         ],
-        render_kw={"placeholder": "Descripción"},
+        render_kw={"placeholder": "Descripcion"},
     )
         
-    precio_unitario = IntegerField(
+    precio_unitario = FloatField(
         validators=[
             InputRequired(),
         ],
