@@ -36,7 +36,7 @@ def NuevaCompra(id_producto):
     return render_template("compras/nueva.html", form=form, user=current_user, id_producto=id_producto)
 
 
-@compras.route("/delete_sale/<int:id>")
+@compras.route("/delete/<int:id>")
 @login_required
 def EliminarCompra(id):
     delete_compra = Compra.query.get(id)
@@ -45,9 +45,19 @@ def EliminarCompra(id):
     return redirect(url_for("compras.home"))
 
 
-
-@compras.route("/update_sale")
+@compras.route("/update/<int:id>", methods=['GET', 'POST'])
 @login_required
-def UpdateCompra():
-    return "Página para actualizar detalle de compra"
-    
+def ActualizarCompra(id):
+    compra_actual = Compra.query.get(id)
+    form = Nueva_Compra()
+    if form.validate_on_submit():
+        compra_actual.id_producto = compra_actual.id_producto
+        compra_actual.proveedor = form.proveedor.data
+        compra_actual.producto = compra_actual.producto
+        compra_actual.precio_unitario = form.precio_unitario.data
+        compra_actual.cantidad = form.cantidad.data
+        compra_actual.fecha = form.fecha.data
+        compra_actual.total_compra = compra_actual.precio_unitario * compra_actual.cantidad
+        db.session.commit()
+        return redirect(url_for("compras.home"))
+    return render_template("compras/actualizar.html", form=form, item=compra_actual, user=current_user, id=id)

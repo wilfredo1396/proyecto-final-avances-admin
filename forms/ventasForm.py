@@ -5,13 +5,13 @@ from wtforms.validators import InputRequired, Length
 
 
 
-class Nueva_Compra(FlaskForm):
-    proveedor = StringField(
+class Nueva_Venta(FlaskForm):
+    cliente = StringField(
         validators=[
             InputRequired(),
             Length(min=4, max=80),
         ],
-        render_kw={"placeholder": "Proveedor"},
+        render_kw={"placeholder": "Nombre del cliente"},
     )
     
     
@@ -19,14 +19,14 @@ class Nueva_Compra(FlaskForm):
         validators=[
             InputRequired(),
         ],
-        render_kw={"placeholder": "Precio unitario"},
+        render_kw={"placeholder": "Precio unitario de venta"},
     )
     
     cantidad = IntegerField(
         validators=[
             InputRequired(),
         ],
-        render_kw={"placeholder": "Cantidad de artículos"},
+        render_kw={"placeholder": "Cantidad comprada"},
     )
     
     fecha = StringField(

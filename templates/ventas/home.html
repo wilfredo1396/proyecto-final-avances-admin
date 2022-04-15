@@ -1,6 +1,6 @@
 {% extends '/compras/base.html' %}
 
-{% block title %}Compras{% endblock  %}
+{% block title %}Ventas{% endblock  %}
 
 {% block contents %}
 <br>
@@ -14,11 +14,11 @@
         <tr>
             <th> Id </th>
             <th> Id producto </th>
-            <th> Proveedor </th>
+            <th> Cliente </th>
             <th> Producto </th>
-            <th> Precio unitario </th>
-            <th> Cantidad </th>
-            <th> Fecha de compra </th>
+            <th> Precio unitario de venta </th>
+            <th> Cantidad vendida </th>
+            <th> Fecha de venta </th>
             <th> Total </th>
         </tr>
     </thead>
@@ -28,14 +28,14 @@
         <tr>
             <td>{{ item.id }}</td>
             <td>{{ item.id_producto }}</td>
-            <td>{{ item.proveedor }}</td>
+            <td>{{ item.cliente }}</td>
             <td>{{ item.producto }}</td>
             <td>{{ item.precio_unitario }}</td>
             <td>{{ item.cantidad }}</td>
             <td>{{ item.fecha }}</td>
-            <td>{{ item.total_compra }}</td>
-            <td><a href="{{ url_for('compras.EliminarCompra', id=item.id) }}">Eliminar</a></td>
-            <td><a href="{{ url_for('compras.ActualizarCompra', id=item.id, id_producto=item.id_producto) }}">Actualizar </a></td>
+            <td>{{ item.total_venta }}</td>
+            <td><a href="{{ url_for('ventas.EliminarVenta', id=item.id) }}">Eliminar</a></td>
+            <td><a href="#">Actualizar </a></td>
         </tr>
 
         {% endfor %}
@@ -44,9 +44,9 @@
 </table>
 <br>
 <br>
-<a href="{{ url_for('productos.home')}}">Ver Inventario</a>
+<a href="{{ url_for('productos.home')}}">Inventario</a>
 <br>
 <br>
-<a href="{{ url_for('ventas.home')}}">Ver Ventas</a>
+<a href="{{ url_for('compras.home')}}">Ver Compras</a>
 
 {% endblock  %}

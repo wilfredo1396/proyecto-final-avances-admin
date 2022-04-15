@@ -1,0 +1,27 @@
+{% extends '/compras/base.html' %}
+
+{% block title %}Agregar Venta{% endblock  %}
+
+{% block contents %}
+<h1>Venta nueva</h1>
+<br>
+<h3>Por favor ingrese los detalles de la venta</h3>
+{% if user %}
+<br>
+<br>
+<form action="{{ url_for('ventas.NuevaVenta', id_producto=id_producto) }}" method="post">
+    {{ form.hidden_tag() }}
+    {{ form.cliente.label }}
+    {{ form.cliente }}
+    {{ form.precio_unitario.label }}
+    {{ form.precio_unitario }}
+    {{ form.cantidad.label }}
+    {{ form.cantidad }}
+    {{ form.fecha.label }}
+    {{ form.fecha }}
+    {{ form.submit }}
+
+</form>
+{% endif %}
+
+{% endblock  %}

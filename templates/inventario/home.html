@@ -29,6 +29,7 @@
             <td>{{ item.existencia }}</td>
             <td><a href="{{ url_for('productos.EliminarProducto', id_producto = item.id_producto) }}"> Eliminar </a></td>
             <td><a href="{{ url_for('compras.NuevaCompra', id_producto = item.id_producto) }}"> Compra </a></td>
+            <td><a href="{{ url_for('ventas.NuevaVenta', id_producto = item.id_producto) }}"> Venta </a></td>
         </tr>
         
         {% endfor %}
@@ -40,5 +41,5 @@
 <a href="{{ url_for('compras.home') }}"> Ver Compras </a>
 <br>
 <br>
-<a href="#"> Ver Ventas </a>
+<a href="{{ url_for('ventas.home') }}"> Ver Ventas </a>
 {% endblock  %}

@@ -1,0 +1,45 @@
+{% extends '/compras/base.html' %}
+
+{% block title %}Actualizar Compra{% endblock  %}
+
+{% block contents %}
+<br>
+<h3>Los detalles de la compra actualmenete son:</h3>
+<br>
+<br>
+{% if item %}
+<ul>
+        <li>Id: {{ item.id }}</li>
+        <li>Id del producto: {{ item.id_producto }}</li>
+        <li>Proveedor: {{ item.proveedor }}</li>
+        <li>Producto: {{ item.producto }}</li>
+        <li>Precio por unidad: {{ item.precio_unitario }}</li>
+        <li>Cantidad comprada: {{ item.cantidad }}</li>
+        <li>Fecha de compra: {{ item.fecha }}</li>
+        <li>Total: {{ item.total_compra }}</li>
+</ul>
+{% endif %}
+
+<h1>Cambio en la compra</h1>
+<br>
+<br>
+<h3>Por favor ingrese la información actualizada de la compra</h3>
+<br>
+<br>
+{% if user %}
+<form action="{{ url_for('compras.ActualizarCompra', id=id) }}" method="post">
+    {{ form.hidden_tag() }}
+    {{ form.proveedor.label }}
+    {{ form.proveedor }}
+    {{ form.precio_unitario.label }}
+    {{ form.precio_unitario }}
+    {{ form.cantidad.label }}
+    {{ form.cantidad }}
+    {{ form.fecha.label }}
+    {{ form.fecha }}
+    {{ form.submit }}
+
+</form>
+{% endif %}
+
+{% endblock  %}
