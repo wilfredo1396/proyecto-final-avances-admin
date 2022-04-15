@@ -1,0 +1,45 @@
+{% extends '/ventas/base.html' %}
+
+{% block title %}Actualizar Venta{% endblock  %}
+
+{% block contents %}
+<br>
+<h3>Los detalles de la venta actualmenete son:</h3>
+<br>
+<br>
+{% if item %}
+<ul>
+        <li>Id: {{ item.id }}</li>
+        <li>Id del producto: {{ item.id_producto }}</li>
+        <li>Cliente: {{ item.cliente }}</li>
+        <li>Producto: {{ item.producto }}</li>
+        <li>Precio por unidad: {{ item.precio_unitario }}</li>
+        <li>Cantidad comprada: {{ item.cantidad }}</li>
+        <li>Fecha de venta: {{ item.fecha }}</li>
+        <li>Total: {{ item.total_venta }}</li>
+</ul>
+{% endif %}
+
+<h1>Cambio en la venta</h1>
+<br>
+<br>
+<h3>Por favor ingrese la información actualizada de la venta</h3>
+<br>
+<br>
+{% if user %}
+<form action="{{ url_for('ventas.ActualizarVenta', id=id) }}" method="post">
+    {{ form.hidden_tag() }}
+    {{ form.cliente.label }}
+    {{ form.cliente }}
+    {{ form.precio_unitario.label }}
+    {{ form.precio_unitario }}
+    {{ form.cantidad.label }}
+    {{ form.cantidad }}
+    {{ form.fecha.label }}
+    {{ form.fecha }}
+    {{ form.submit }}
+
+</form>
+{% endif %}
+
+{% endblock  %}

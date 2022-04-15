@@ -43,3 +43,20 @@ def EliminarVenta(id):
     db.session.delete(delete_compra)
     db.session.commit()
     return redirect(url_for("ventas.home"))
+
+@ventas.route("/update/<int:id>", methods=['GET', 'POST'])
+@login_required
+def ActualizarVenta(id):
+    venta_actual = Venta.query.get(id)
+    form = Nueva_Venta()
+    if form.validate_on_submit():
+        venta_actual.id_producto = venta_actual.id_producto
+        venta_actual.cliente = form.cliente.data
+        venta_actual.producto = venta_actual.producto
+        venta_actual.precio_unitario = form.precio_unitario.data
+        venta_actual.cantidad = form.cantidad.data
+        venta_actual.fecha = form.fecha.data
+        venta_actual.total_venta = venta_actual.precio_unitario * venta_actual.cantidad
+        db.session.commit()
+        return redirect(url_for("ventas.home"))
+    return render_template("ventas/actualizar.html", form=form, item=venta_actual, user=current_user, id=id)

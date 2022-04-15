@@ -35,7 +35,7 @@
             <td>{{ item.fecha }}</td>
             <td>{{ item.total_venta }}</td>
             <td><a href="{{ url_for('ventas.EliminarVenta', id=item.id) }}">Eliminar</a></td>
-            <td><a href="#">Actualizar </a></td>
+            <td><a href="{{ url_for('ventas.ActualizarVenta', id=item.id) }}">Actualizar </a></td>
         </tr>
 
         {% endfor %}
