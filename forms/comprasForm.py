@@ -14,14 +14,7 @@ class Nueva_Compra(FlaskForm):
         render_kw={"placeholder": "Proveedor"},
     )
     
-    descripcion = StringField(
-        validators=[
-            InputRequired(),
-            Length(min=5, max=120),
-        ],
-        render_kw={"placeholder": "Descripcion"},
-    )
-        
+    
     precio_unitario = FloatField(
         validators=[
             InputRequired(),

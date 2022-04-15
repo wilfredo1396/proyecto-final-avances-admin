@@ -1,0 +1,23 @@
+{% extends '/compras/base.html' %}
+
+{% block title %}Agregar Producto{% endblock  %}
+
+{% block contents %}
+<h1>Producto nuevo</h1>
+<br>
+<h3>Por favor ingrese los detalles del Producto</h3>
+{% if user %}
+<br>
+<br>
+<form action="{{ url_for('productos.NuevoProducto') }}" method="post">
+    {{ form.hidden_tag() }}
+    {{ form.producto.label }}
+    {{ form.producto }}
+    {{ form.existencia.label }}
+    {{ form.existencia }}
+    {{ form.submit }}
+
+</form>
+{% endif %}
+
+{% endblock  %}
