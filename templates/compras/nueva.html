@@ -9,12 +9,10 @@
 {% if user %}
 <br>
 <br>
-<form action="{{ url_for('compras.NuevaCompra') }}" method="post">
+<form action="{{ url_for('compras.NuevaCompra', id_producto=id_producto) }}" method="post">
     {{ form.hidden_tag() }}
     {{ form.proveedor.label }}
     {{ form.proveedor }}
-    {{ form.descripcion.label }}
-    {{ form.descripcion }}
     {{ form.precio_unitario.label }}
     {{ form.precio_unitario }}
     {{ form.cantidad.label }}

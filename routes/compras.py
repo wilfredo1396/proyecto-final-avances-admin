@@ -15,13 +15,13 @@ def home():
 
 
 
-@compras.route("/new/<int:id_product>", methods=['GET', 'POST'])
+@compras.route("/new/<int:id_producto>", methods=['GET', 'POST'])
 @login_required
-def NuevaCompra(id_product):
-    nombre_producto = Inventario.query.get(id_product)
+def NuevaCompra(id_producto):
+    nombre_producto = Inventario.query.get(id_producto)
     form = Nueva_Compra()
     if form.validate_on_submit():
-        id_producto = id_product
+        id_producto = id_producto
         proveedor = form.proveedor.data
         producto = nombre_producto.producto
         precio_unitario = form.precio_unitario.data
@@ -33,7 +33,7 @@ def NuevaCompra(id_product):
         db.session.add(nuevaCompra)
         db.session.commit()
         return redirect(url_for("compras.home"))
-    return render_template("compras/nueva.html", form=form, user=current_user, id_product=id_producto)
+    return render_template("compras/nueva.html", form=form, user=current_user, id_producto=id_producto)
 
 
 @compras.route("/delete_sale/<int:id>")
