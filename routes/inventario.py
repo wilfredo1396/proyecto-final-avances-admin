@@ -33,14 +33,16 @@ def NuevoProducto():
 @login_required
 def EliminarProducto(id_producto):
     delete_producto = Inventario.query.get(id_producto)
-    delete_compra = Compra.query.filter(id_producto = id_producto).all
-    delete_venta = Venta.query.filter(id_producto = id_producto).all
-    
+    delete_compra = Compra.query.filter_by(id_producto = id_producto).all()
+    delete_venta = Venta.query.filter_by(id_producto = id_producto).all()
     db.session.delete(delete_producto)
-    db.session.delete(delete_compra)
-    db.session.delete(delete_venta)
-    db.session.commit()
-    db.session.commit()
+    for item in delete_compra:
+        db.session.delete(item)
+        db.session.commit()
+    for item in delete_venta:
+        db.session.delete(delete_venta)
+        db.session.commit()
+    
     db.session.commit()
     return redirect(url_for("productos.home"))
 
