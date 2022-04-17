@@ -27,7 +27,7 @@
 <br>
 <br>
 {% if user %}
-<form action="{{ url_for('ventas.ActualizarVenta', id=id) }}" method="post">
+<form action="{{ url_for('ventas.ActualizarVenta', id=id, id_producto = id_producto) }}" method="post">
     {{ form.hidden_tag() }}
     {{ form.cliente.label }}
     {{ form.cliente }}

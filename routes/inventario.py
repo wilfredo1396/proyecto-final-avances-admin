@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for
 from models.inventario import Inventario  
+from models.compras import Compra
+from models.ventas import Venta
 from forms.inventarioForm import Nuevo_Producto
 from flask_login import login_required, current_user
 from utils.db import db
@@ -31,6 +33,16 @@ def NuevoProducto():
 @login_required
 def EliminarProducto(id_producto):
     delete_producto = Inventario.query.get(id_producto)
+    delete_compra = Compra.query.filter(id_producto = id_producto).all
+    delete_venta = Venta.query.filter(id_producto = id_producto).all
+    
     db.session.delete(delete_producto)
+    db.session.delete(delete_compra)
+    db.session.delete(delete_venta)
+    db.session.commit()
+    db.session.commit()
     db.session.commit()
     return redirect(url_for("productos.home"))
+
+
+

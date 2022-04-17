@@ -1,4 +1,4 @@
-{% extends '/compras/base.html' %}
+{% extends '/ventas/base.html' %}
 
 {% block title %}Ventas{% endblock  %}
 
@@ -34,8 +34,8 @@
             <td>{{ item.cantidad }}</td>
             <td>{{ item.fecha }}</td>
             <td>{{ item.total_venta }}</td>
-            <td><a href="{{ url_for('ventas.EliminarVenta', id=item.id) }}">Eliminar</a></td>
-            <td><a href="{{ url_for('ventas.ActualizarVenta', id=item.id) }}">Actualizar </a></td>
+            <td><a href="{{ url_for('ventas.EliminarVenta', id=item.id, id_producto =item.id_producto) }}">Eliminar</a></td>
+            <td><a href="{{ url_for('ventas.ActualizarVenta', id=item.id, id_producto =item.id_producto) }}">Actualizar </a></td>
         </tr>
 
         {% endfor %}

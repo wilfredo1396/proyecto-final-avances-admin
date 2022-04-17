@@ -32,21 +32,28 @@ def NuevaVenta(id_producto):
         nuevaVenta = Venta(id_producto, cliente, producto, precio_unitario, cantidad, fecha, total_venta)
         db.session.add(nuevaVenta)
         db.session.commit()
+        
+        nombre_producto.existencia = nombre_producto.existencia - cantidad
+        db.session.commit()
         return redirect(url_for("ventas.home"))
     return render_template("ventas/nuevo.html", form=form, user=current_user, id_producto=id_producto)
 
 
-@ventas.route("/delete_sale/<int:id>")
+@ventas.route("/delete_sale/<int:id>/<int:id_producto>")
 @login_required
-def EliminarVenta(id):
-    delete_compra = Venta.query.get(id)
-    db.session.delete(delete_compra)
+def EliminarVenta(id, id_producto):
+    nombre_producto = Inventario.query.get(id_producto)
+    delete_venta = Venta.query.get(id)
+    nombre_producto.existencia = nombre_producto.existencia + delete_venta.cantidad
+    db.session.delete(delete_venta)
+    db.session.commit()
     db.session.commit()
     return redirect(url_for("ventas.home"))
 
-@ventas.route("/update/<int:id>", methods=['GET', 'POST'])
+@ventas.route("/update/<int:id>/<int:id_producto>", methods=['GET', 'POST'])
 @login_required
-def ActualizarVenta(id):
+def ActualizarVenta(id, id_producto):
+    existencia_actual = Inventario.query.get(id_producto)
     venta_actual = Venta.query.get(id)
     form = Nueva_Venta()
     if form.validate_on_submit():
@@ -57,6 +64,8 @@ def ActualizarVenta(id):
         venta_actual.cantidad = form.cantidad.data
         venta_actual.fecha = form.fecha.data
         venta_actual.total_venta = venta_actual.precio_unitario * venta_actual.cantidad
+        existencia_actual.existencia = existencia_actual.existencia + venta_actual.cantidad
+        db.session.commit()
         db.session.commit()
         return redirect(url_for("ventas.home"))
-    return render_template("ventas/actualizar.html", form=form, item=venta_actual, user=current_user, id=id)
+    return render_template("ventas/actualizar.html", form=form, item=venta_actual, user=current_user, id=id, id_producto=id_producto)

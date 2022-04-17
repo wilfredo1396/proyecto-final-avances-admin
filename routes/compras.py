@@ -32,15 +32,21 @@ def NuevaCompra(id_producto):
         nuevaCompra = Compra(id_producto, proveedor, producto, precio_unitario, cantidad, fecha, total_compra)
         db.session.add(nuevaCompra)
         db.session.commit()
+        
+        nombre_producto.existencia = nombre_producto.existencia + cantidad
+        db.session.commit()
         return redirect(url_for("compras.home"))
     return render_template("compras/nueva.html", form=form, user=current_user, id_producto=id_producto)
 
 
-@compras.route("/delete/<int:id>")
+@compras.route("/delete/<int:id>/<int:id_producto>")
 @login_required
-def EliminarCompra(id):
+def EliminarCompra(id, id_producto):
+    nombre_producto = Inventario.query.get(id_producto)
     delete_compra = Compra.query.get(id)
+    nombre_producto.existencia = nombre_producto.existencia - delete_compra.cantidad
     db.session.delete(delete_compra)
+    db.session.commit()
     db.session.commit()
     return redirect(url_for("compras.home"))
 
